@@ -13,8 +13,8 @@ This is a mobile-friendly study dashboard. It uses Supabase Authentication for a
 2. In the project dashboard, open **Project Settings → API**.
 3. Copy the **Project URL** and the **publishable/anon public key**.
 4. In `index.html`, replace:
-   - `YOUR_SUPABASE_PROJECT_URL`
-   - `YOUR_SUPABASE_PUBLIC_ANON_KEY`
+   - `https://bnbrpisqkygouabisfsc.supabase.co`
+   - `sb_publishable_9Ky4C0XON4fr0jDlQ7e6F`
 5. Never use a `service_role` key in browser code.
 
 ## 2. Create the homework table
