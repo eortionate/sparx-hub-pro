@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17172b">
+<title>SPARX HUB PRO</title>
+<style>
+:root{color-scheme:dark;--bg:#10111c;--panel:#1b1d2e;--panel2:#24273b;--text:#f5f5fb;--muted:#a9abc1;--accent:#9b8cff;--green:#53d6a0;--line:#34374d;--red:#ff7885}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#242344 0,#10111c 48%);color:var(--text);font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:760px;margin:auto;padding:22px 16px 48px}.brand{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:8px 0 24px}.brand h1{font-size:25px;letter-spacing:.08em;margin:0}.pill{border:1px solid #3d705e;color:var(--green);border-radius:999px;padding:5px 10px;font-size:12px}
+.card{background:rgba(27,29,46,.96);border:1px solid var(--line);border-radius:18px;padding:18px;margin:14px 0;box-shadow:0 12px 36px #0002}
+h2{font-size:19px;margin:0 0 14px}h3{font-size:16px;margin:0 0 8px}p,.muted{color:var(--muted);line-height:1.5}.small{font-size:13px}
+label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}input,select,textarea{width:100%;padding:12px 13px;border:1px solid var(--line);border-radius:11px;background:#111321;color:var(--text);font:inherit}textarea{min-height:110px;resize:vertical}
+button,.button{border:0;border-radius:11px;background:var(--accent);color:#151326;font-weight:700;padding:12px 15px;font:inherit;cursor:pointer;text-decoration:none;display:inline-flex;justify-content:center;align-items:center;gap:8px}
+button.secondary,.button.secondary{background:var(--panel2);color:var(--text);border:1px solid var(--line)}button.danger{background:#542b38;color:#ffe8eb}button:disabled{opacity:.5;cursor:not-allowed}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.full{width:100%}.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.tab{background:var(--panel2);color:var(--muted);padding:10px 5px;font-size:13px}.tab.active{background:#39345e;color:#fff;border:1px solid var(--accent)}
+.hidden{display:none!important}.notice{padding:11px 13px;border-radius:11px;background:#25283d;color:#c9cbe0;font-size:13px;margin:12px 0}.error{color:#ff9ba5}.success{color:var(--green)}
+.assignment{border:1px solid var(--line);border-radius:13px;padding:13px;margin:10px 0;background:#171929}.assignment-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}.tag{font-size:11px;color:#d2caff;background:#373154;border-radius:99px;padding:4px 8px;white-space:nowrap}.done{opacity:.65}.done strong{text-decoration:line-through}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.subject{background:var(--panel2);border:1px solid var(--line);color:var(--text);padding:15px 5px;display:flex;flex-direction:column;gap:7px}.subject.active{border-color:var(--accent);background:#302c4c}.subject span:first-child{font-size:24px}
+.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}.row .fit{flex:0 0 auto}
+hr{border:0;border-top:1px solid var(--line);margin:17px 0}
+#appHeader{display:flex;justify-content:space-between;align-items:center;gap:10px}.count{font-size:28px;font-weight:750}
+footer{color:var(--muted);font-size:12px;text-align:center;padding:18px}
+@media(max-width:420px){.tabs{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr 1fr}.brand h1{font-size:21px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><h1>✦ SPARX HUB PRO</h1><span class="pill">STUDY SPACE</span></div>
+
+  <section id="authCard" class="card">
+    <h2 id="authTitle">Your homework, in one place.</h2>
+    <p class="small">Create your own account or sign in. Account passwords are handled by Supabase Authentication, not stored in this page.</p>
+    <div id="configNotice" class="notice">Setup needed: add your Supabase project URL and public anon key in the setup section of this file. Follow README.md.</div>
+    <label for="email">Email</label><input id="email" type="email" autocomplete="email" placeholder="you@example.com">
+    <label for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="At least 8 characters">
+    <div class="actions"><button id="signIn" class="full">Sign in</button><button id="signUp" class="secondary full">Create account</button></div>
+    <p id="authMessage" class="small" role="status"></p>
+  </section>
+
+  <section id="dashboard" class="hidden">
+    <div class="card">
+      <div id="appHeader"><div><div class="muted small">YOUR STUDY DASHBOARD</div><h2 style="margin:4px 0">Welcome back 👋</h2></div><button id="signOut" class="secondary">Sign out</button></div>
+      <p class="small">Add assignments you see in Sparx, keep track of what is unfinished, and get help understanding questions.</p>
+      <div class="grid">
+        <button class="subject active" data-subject="Maths"><span>➗</span><b>Maths</b></button>
+        <button class="subject" data-subject="Science"><span>🧪</span><b>Science</b></button>
+        <button class="subject" data-subject="Reader"><span>📚</span><b>Reader</b></button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Add homework</h2>
+      <label for="assignmentName">Assignment name</label><input id="assignmentName" placeholder="e.g. Algebra practice">
+      <div class="row">
+        <div><label for="assignmentSubject">Subject</label><select id="assignmentSubject"><option>Maths</option><option>Science</option><option>Reader</option></select></div>
+        <div><label for="dueDate">Due date</label><input id="dueDate" type="datetime-local"></div>
+      </div>
+      <label for="questionCount">Questions / tasks remaining (optional)</label><input id="questionCount" type="number" min="0" placeholder="e.g. 12">
+      <div class="actions"><button id="addAssignment" class="full">＋ Add assignment</button></div>
+      <p id="addMessage" class="small" role="status"></p>
+    </div>
+
+    <div class="card">
+      <div class="row"><div><h2 style="margin:0">My homework</h2><p class="small" style="margin:4px 0">Assignments you have added</p></div><div class="fit count" id="remainingCount">0</div></div>
+      <div class="tabs" style="margin:14px 0"><button class="tab active" data-filter="All">All</button><button class="tab" data-filter="Maths">Maths</button><button class="tab" data-filter="Science">Science</button><button class="tab" data-filter="Reader">Reader</button></div>
+      <div id="assignmentList"><p class="muted small">No assignments yet. Add one above.</p></div>
+    </div>
+
+    <div class="card">
+      <h2>Question helper 🧠</h2>
+      <p class="small">Paste or type a question. The helper prepares a prompt you can open in ChatGPT. It does not read Sparx automatically or submit answers.</p>
+      <label for="helperSubject">Subject</label><select id="helperSubject"><option>Maths</option><option>Science</option><option>Reader</option></select>
+      <label for="question">Question or instructions</label><textarea id="question" placeholder="Type the question here, or describe what you are stuck on..."></textarea>
+      <label for="delay">Study prompt delay: <strong id="delayValue">5 seconds</strong></label><input id="delay" type="range" min="1" max="60" value="5">
+      <div class="actions"><button id="getHelp" class="full">Get step-by-step help</button><button id="copyPrompt" class="secondary">Copy prompt</button></div>
+      <p id="helperMessage" class="small" role="status"></p>
+    </div>
+    <div class="notice">Sparx connection: use the official Sparx website to sign in. This dashboard cannot access your private Sparx account, scrape assignments, or operate Sparx in the background on Android Chrome. Never give your Sparx password to this dashboard.</div>
+  </section>
+  <footer>SPARX HUB PRO • Independent study companion • Not affiliated with Sparx</footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* SETUP: replace these two placeholders with your Supabase project URL and public anon key.
+   Never put a service_role key or any private secret in this file. */
+const SUPABASE_URL = "YOUR_SUPABASE_PROJECT_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_PUBLIC_ANON_KEY";
+const configured = SUPABASE_URL.startsWith("https://") && !SUPABASE_URL.includes("YOUR_") && !SUPABASE_ANON_KEY.includes("YOUR_");
+const client = configured ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const $ = id => document.getElementById(id);
+let currentUser = null, filter = "All", activeSubject = "Maths", lastPrompt = "";
+
+if(configured) $("configNotice").classList.add("hidden");
+function authMsg(msg, error=false){$("authMessage").textContent=msg;$("authMessage").className="small "+(error?"error":"success")}
+function showApp(user){currentUser=user;$("authCard").classList.add("hidden");$("dashboard").classList.remove("hidden");loadAssignments()}
+function showAuth(){$("dashboard").classList.add("hidden");$("authCard").classList.remove("hidden");currentUser=null}
+async function authAction(kind){
+  if(!client){authMsg("Finish Supabase setup first. See README.md.",true);return}
+  const email=$("email").value.trim(), password=$("password").value;
+  if(!email||password.length<8){authMsg("Enter a valid email and a password of at least 8 characters.",true);return}
+  const result=kind==="signup"?await client.auth.signUp({email,password}):await client.auth.signInWithPassword({email,password});
+  if(result.error){authMsg(result.error.message,true);return}
+  if(kind==="signup"&&!result.data.session){authMsg("Account created. Check your email to confirm, then sign in.");return}
+  authMsg("Signed in.");showApp(result.data.user)
+}
+$("signIn").onclick=()=>authAction("signin");$("signUp").onclick=()=>authAction("signup");
+$("signOut").onclick=async()=>{await client.auth.signOut();showAuth()};
+async function loadAssignments(){
+  if(!client||!currentUser)return;
+  const {data,error}=await client.from("homework").select("*").order("due_at",{ascending:true});
+  if(error){$("assignmentList").innerHTML='<p class="error small">Could not load assignments: '+escapeHtml(error.message)+'</p>';return}
+  renderAssignments(data||[]);
+}
+function escapeHtml(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function renderAssignments(items){
+  const shown=items.filter(x=>filter==="All"||x.subject===filter);
+  $("remainingCount").textContent=items.filter(x=>!x.completed).length;
+  if(!shown.length){$("assignmentList").innerHTML='<p class="muted small">No assignments in this view yet. Add one above.</p>';return}
+  $("assignmentList").innerHTML=shown.map(x=>`<div class="assignment ${x.completed?"done":""}"><div class="assignment-top"><div><strong>${escapeHtml(x.title)}</strong><div class="muted small">${escapeHtml(x.subject)}${x.due_at?" • Due "+new Date(x.due_at).toLocaleString():""}${x.remaining_count!==null?" • "+x.remaining_count+" remaining":""}</div></div><span class="tag">${x.completed?"Completed":"Unfinished"}</span></div><div class="actions"><button class="secondary" data-toggle="${x.id}">${x.completed?"Mark unfinished":"Mark complete"}</button><button class="danger" data-delete="${x.id}">Delete</button></div></div>`).join("");
+  document.querySelectorAll("[data-toggle]").forEach(b=>b.onclick=()=>updateAssignment(b.dataset.toggle,{completed:!items.find(x=>x.id===b.dataset.toggle).completed}));
+  document.querySelectorAll("[data-delete]").forEach(b=>b.onclick=()=>deleteAssignment(b.dataset.delete));
+}
+async function updateAssignment(id,patch){const {error}=await client.from("homework").update(patch).eq("id",id);if(error)alert(error.message);else loadAssignments()}
+async function deleteAssignment(id){if(!confirm("Delete this assignment from your dashboard?"))return;const {error}=await client.from("homework").delete().eq("id",id);if(error)alert(error.message);else loadAssignments()}
+$("addAssignment").onclick=async()=>{
+  const title=$("assignmentName").value.trim();if(!title){$("addMessage").textContent="Enter an assignment name.";return}
+  const count=$("questionCount").value===""?null:Number($("questionCount").value);
+  const payload={user_id:currentUser.id,title,subject:$("assignmentSubject").value,due_at:$("dueDate").value?new Date($("dueDate").value).toISOString():null,remaining_count:count,completed:false};
+  const {error}=await client.from("homework").insert(payload);
+  if(error){$("addMessage").textContent=error.message;$("addMessage").className="small error";return}
+  $("assignmentName").value="";$("questionCount").value="";$("dueDate").value="";$("addMessage").textContent="Assignment added.";$("addMessage").className="small success";loadAssignments();
+};
+document.querySelectorAll("[data-filter]").forEach(b=>b.onclick=()=>{filter=b.dataset.filter;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x===b));loadAssignments()});
+document.querySelectorAll("[data-subject]").forEach(b=>b.onclick=()=>{activeSubject=b.dataset.subject;$("assignmentSubject").value=activeSubject;$("helperSubject").value=activeSubject;document.querySelectorAll("[data-subject]").forEach(x=>x.classList.toggle("active",x===b));filter=activeSubject;document.querySelectorAll("[data-filter]").forEach(x=>x.classList.toggle("active",x.dataset.filter===filter));loadAssignments()});
+$("delay").oninput=()=>{$("delayValue").textContent=$("delay").value+" seconds"};
+function buildPrompt(){const q=$("question").value.trim();if(!q){$("helperMessage").textContent="Add a question first.";return ""}return `Help me understand this ${$("helperSubject").value} homework question. Explain the reasoning step by step, show the working, and give me a chance to try before revealing the final answer:\n\n${q}`}
+$("getHelp").onclick=()=>{lastPrompt=buildPrompt();if(lastPrompt){$("helperMessage").textContent="Opening ChatGPT with your question. Check the prompt before sending.";window.open("https://chatgpt.com/?q="+encodeURIComponent(lastPrompt),"_blank","noopener")}};
+$("copyPrompt").onclick=async()=>{lastPrompt=buildPrompt();if(lastPrompt){try{await navigator.clipboard.writeText(lastPrompt);$("helperMessage").textContent="Prompt copied. Paste it into ChatGPT."}catch(e){$("helperMessage").textContent="Clipboard unavailable. Select and copy the prompt manually."}}};
+if(client){client.auth.getSession().then(({data})=>{if(data.session)showApp(data.session.user)});client.auth.onAuthStateChange((_event,session)=>{if(session)showApp(session.user);else showAuth()})}
+</script>
+</body></html>
